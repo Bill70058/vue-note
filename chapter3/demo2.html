@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+  <style>
+      div{
+          
+      }
+  </style>
+    <link href="./bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div class="container">
+        <form class="form">
+            <label>姓名</label>
+            <input type="text" class="form-control" v-model="nameNode">
+            <label>年龄</label>
+            <input type="text" class="form-control" v-model="ageNode">
+        </form>
+        <input type="button" class="btn btn-default btn-primary" value="确定" @click="add">
+        <input type="button" class="btn btn-default btn-primary" value="按年龄排序" @click="ageSort">
+  
+        <table class="table table-hover table-bordered" style="margin: 20px;text-align:center;">
+            <thead>
+                <tr>
+                    <td>序号</td>
+                    <td>姓名</td>
+                    <td>年龄</td>
+                    <td>选项</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="i in msg">
+                    <td>{{$index}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.age}}</td>
+                    <td><input type="button" value="delete" class="btn btn-default btn-danger btn-xs" data-toggle="modal" data-target="#myModal" @click="index=$index"></td>
+                </tr>
+                <tr v-show="msg.length?false:true;">
+                    <td colspan="4">请输入数据</td>
+                </tr>
+                <tr v-show="msg.length?true:false;">
+                    <td colspan="4"><input type="button" value="alldelete" class="btn btn-default btn-danger btn-xs" data-toggle="modal" data-target="#allModal"></td></tr>
+            </tbody>
+        </table>
+  
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">删除框</h4>
+                </div>
+                <div class="modal-body">
+                  <p>确认删除么？</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-primary" @click="delete" data-dismiss="modal">确认删除</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+
+<!-- 全部删除的弹出框 -->
+          <div class="modal fade" tabindex="-1" role="dialog" id="allModal">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">删除框</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>确认全部删除么？</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                      <button type="button" class="btn btn-primary" @click="allDelete" data-dismiss="modal">确认删除</button>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+
+
+<script>
+    new Vue({
+        el:'body',
+        data:{
+            nameNode:'',
+            ageNode:'',
+            msg:[
+
+            ],
+            index:0,
+        },
+        methods:{
+            add:function(){
+                // console.log(this.nameNode, this.ageNode);
+                this.msg.push({
+                    name:this.nameNode,
+                    age:this.ageNode
+                })
+            },
+            delete:function(){
+                this.msg.splice(this.index, 1);
+            },
+            allDelete:function(){
+                this.msg=[];
+            },
+            ageSort:function(){
+                this.msg.sort(function(json1,json2){
+                    return json1.age-json2.age;
+                })
+            }
+        }
+    })
+</script>
+    <script src="../jquery.min.js"></script>
+    <script src="../bootstrap.min.js"></script>
+  </body>
+</html>
