@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   <title>属性4</title>
+   <script src="../vue.js"></script>
+   <style>
+       div{
+           width: 100px;
+           height: 100px;
+           
+       }
+       .red{
+        background: red;
+       }
+       .shadow{
+        box-shadow: 0 0 15px;
+       }
+   </style>
+</head>
+<body>
+    <input type="button" value="click" @click="btn">
+    <div v-bind:class="myDiv"></div>
+    <!-- 或者使用原生的 :class="myDiv"-->
+    <script>
+        //最常用的属性‘class’‘style’    
+        new Vue({
+            el:'body',
+            data:{
+                //赋予多个class 属性一般直接'class="a b c"' 在vue中则使用数组形式
+                //['a','b','c']
+                myDiv:['red','shadow'],
+            },
+            methods:{
+                //切换class
+                //方法‘pop()’是去除class的，方法‘push()’是插入class的
+                //如果只用‘pop’方法的话会一直去除class 样式直到数组为空
+                btn:function(){
+                    this.myDiv.length==1?this.myDiv.push('shadow'):this.myDiv.pop('shadow');
+                }
+            }
+        })
+    </script>
+</body>
+</html>

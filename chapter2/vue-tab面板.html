@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab面板</title>
+    <script src="../vue.js"></script>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: #ccc;
+        }
+        input.active{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    
+<!-- $index 是当前按钮的下标值-->
+<input type="button" v-for="i in value" :value="i" :class="$index==index?'active':''" @click="btn($index)">
+<div v-for="i in inner" v-show="$index==index?true:false" >
+    {{i}}
+</div>
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                index:0,
+                value:['leo','sky','li'],
+                inner:['今年18岁了','今年31岁了','今年22岁了']
+            },
+            methods:{
+                btn:function(myIndex){
+                    this.index=myIndex;
+                }
+            }
+        })    
+    </script>
+</body>
+</html>

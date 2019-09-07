@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   <title>属性5</title>
+   <script src="../vue.js"></script>
+   <style>
+       div{
+           width: 100px;
+           height: 100px;
+           
+       }
+       .red{
+        background: red;
+       }
+       .shadow{
+           box-shadow: 0 0 15px;
+       }
+       .animate{
+           transition: 0.5s;
+       }
+   </style>
+</head>
+<body>
+    <input type="button" value="click" @click="btn">
+    <div v-bind:class="myDiv"></div>
+    <script>  
+        new Vue({
+            el:'body',
+            data:{
+                //使用json 格式也可以
+                myDiv:{
+                    red:true,
+                    shadow:true,
+                    animate:true,
+                    }
+                },
+                methods:{
+               btn:function(){
+                  this.myDiv.shadow=!this.myDiv.shadow;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

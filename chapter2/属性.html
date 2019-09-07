@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性</title>
+    <script src="../vue.js"></script>
+    <style>
+    img{
+        height: 375px;
+        width: 500px;
+    }
+    </style>
+</head>
+<body>
+    <input type="button" value="change" @click="btn">
+    <!-- 如果使用原生的方法‘src’则需要使用vue模板，如果使用vue方法‘v-bind’则不需要
+        使用原生方法的时候会抱一个错误“Failed to load resource: net::ERR_FILE_NOT_FOUND”
+        使用vue方法则不会
+    -->
+    <!-- v-bind:属性名 = 'vue的data值'-->
+    <img v-bind:src="url">
+<!--https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560472659224&di=896584de51fc9b26933157aed6a00ff7&imgtype=0&src=http%3A%2F%2Fimg08.oneniceapp.com%2Fupload%2Favatar%2F2018%2F05%2F05%2Faba7e29327a27abfcb1e525f623934ee.jpg-->
+<script>
+    new Vue({
+        el:'body',
+        data:{
+            url:"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2721952535,2737979507&fm=26&gp=0.jpg",
+        },
+        methods:{
+            btn:function(){
+                this.url="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560472659224&di=896584de51fc9b26933157aed6a00ff7&imgtype=0&src=http%3A%2F%2Fimg08.oneniceapp.com%2Fupload%2Favatar%2F2018%2F05%2F05%2Faba7e29327a27abfcb1e525f623934ee.jpg";
+            }
+        }
+    })
+</script>
+</body>
+</html>

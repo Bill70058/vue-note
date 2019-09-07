@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   <title>属性3</title>
+   <script src="../vue.js"></script>
+   <style>
+       div{
+           width: 100px;
+           height: 100px;
+           
+       }
+       .red{
+        background: red;
+       }
+   </style>
+</head>
+<body>
+    <input type="button" value="click" @click="btn">
+    <div v-bind:class="myDiv"></div>
+    <!-- 或者使用原生的 class="{{myDiv}}-->
+    <script>
+        //最常用的属性‘class’‘style’    
+        new Vue({
+            el:'body',
+            data:{
+                myDiv:'red',
+            }
+        })
+    </script>
+</body>
+</html>

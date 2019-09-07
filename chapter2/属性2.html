@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性2</title>
+    <script src="../vue.js"></script>
+    <style>
+    img{
+        height: 375px;
+        width: 500px;
+    }
+    </style>
+</head>
+<body>
+    <input type="button" value="change" @click="btn">
+    <!-- v-bind: 可以简写只有冒号也可以-->
+    <img :src="url">
+<!--https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560472659224&di=896584de51fc9b26933157aed6a00ff7&imgtype=0&src=http%3A%2F%2Fimg08.oneniceapp.com%2Fupload%2Favatar%2F2018%2F05%2F05%2Faba7e29327a27abfcb1e525f623934ee.jpg-->
+<script>
+    new Vue({
+        el:'body',
+        data:{
+            //num 是计数器开关，用于控制图片切换
+            num:0,
+            url:"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2721952535,2737979507&fm=26&gp=0.jpg",
+        },
+        methods:{
+            btn:function(){
+                this.num++;
+                this.num%2==1?this.url="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560472659224&di=896584de51fc9b26933157aed6a00ff7&imgtype=0&src=http%3A%2F%2Fimg08.oneniceapp.com%2Fupload%2Favatar%2F2018%2F05%2F05%2Faba7e29327a27abfcb1e525f623934ee.jpg":
+                this.url="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2721952535,2737979507&fm=26&gp=0.jpg";
+            }
+        }
+    })
+</script>
+</body>
+</html>

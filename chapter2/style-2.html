@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>style</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <input type="button" value="cahnge" @click="btn">
+    <!-- style: josn/ [json,json,json]/string-->
+    <!-- <div v-bind:style="myDiv"></div>-->
+    <div v-bind:style="[myDiv,green]"></div>
+    <!-- <div v-bind:style="myDiv"></div>-->
+    <!-- json 与 string 差不多意思-->
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                myDiv:{
+                    width:"200px",
+                    height:"200px",
+                    background:"red",
+                    transition:"0.5s"
+                },
+                green:{
+                    background:"green",
+                }
+            },
+            methods:{
+                btn:function(){
+                    this.myDiv.width="400px";
+                    this.myDiv.height="400px";
+                    this.myDiv.background="green";
+                }
+            }
+        })    
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板2</title>
+    <script src="../vue.js"></script>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" @click="fn" value="点我">
+{{{msg}}}
+
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                msg:'<div>这里是一个div</div>',
+            },
+            methods:{
+                fn:function(){
+                    this.msg='change';
+                }
+            }
+        })
+    </script>
+</body>
+</html>
