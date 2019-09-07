@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue - 全局组件</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="div1"><aaa></aaa></div>
+    <div id="box">
+        <input type="button" value="aaa" @click="msg='aaa'">
+        <input type="button" value="bbb" @click="msg='bbb'">
+        
+        <!-- :is 设置组件指向 -->
+        <component :is="msg"></component>
+    </div>
+    <template id="mya">
+        <h1>i am aaa components</h1>
+        <span>{{msg}}</span>
+    </template>
+    <template id="myb">
+            <h1>i am bbb components</h1>
+            <span>{{msg}}</span>
+        </template>
+    <script>
+        new Vue({
+            el:'#box',
+            data:{
+                msg:'aaa'
+            },
+            components: {
+                aaa:{
+                    data(){
+                        return {
+                            msg:'hehhehe'
+                        }
+                    },
+                    template:'#mya',
+                },
+                bbb:{
+                    data(){
+                        return {
+                            msg:'hehhehe2'
+                        }
+                    },
+                    template:'#myb',
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue - 全局组件</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="div1"><aaa></aaa></div>
+    <script>
+
+        var bill = Vue.extend({
+            data(){
+                return {
+                    arr:['mary','json','mark'],
+                    arr2:['男-18','男19','女-20']
+                }
+            },
+            template:`<div>
+                <input v-for='i in arr' :value="i" type="button"/>
+                <div v-for='i in arr2'>{{i}}</div>
+            </div>`
+        });
+
+        //作用域定义为局部范围的，设置组件属性绑定 - 只能在这个作用域下使用
+        new Vue({
+            el:'.div1',
+            components: {
+                'aaa':bill
+            }
+        })
+    </script>
+</body>
+</html>

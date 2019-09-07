@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>limitby</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <ul v-for="i in arr | limitBy 2 2">
+        <li>{{i}}</li>
+    </ul>
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                arr:[1,2,3,4,5]
+            }
+        })
+    </script>
+</body>
+</html>

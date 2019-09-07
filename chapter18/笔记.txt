@@ -1,0 +1,179 @@
+#### 父子级数据同步：
+- 1.x方法：
+.sync - 与think同音     
+
+```
+    <div id="app">
+        <h1>我是父级，我的数据是=>{{msg1}}</h1>
+        <!-- 在这里加入sync方法 -->
+        <my :mymsg.sync="msg1"></my>
+    </div>
+
+    <template id="bill">
+        <div>
+            <input type="button" value="改变" @click="cg">
+            <h1>我是子级数据=>{{mymsg}}</h1>
+        </div>
+    </template>
+
+js 部分：
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'今天天气不错',
+            msg1:'父级数据',
+        },
+        components: {
+            'my':{
+                methods:{
+                    cg:function(){
+                        this.mymsg="改变数据";
+                    }
+                },
+                props: ['mymsg'],
+                template:'#bill',
+            }
+        }
+    })
+```
+
+- 2.x版本：
+利用了原生js的**对象特性** -- 引用
+当父级数据是**对象**形式的时候在作用域中``<my :mymsg="msg1"></my>``传递的就不再是以值的形式传递，
+而是用**引用**传递对象的形式传递，类似于C语言的指针/别名，所以，用这种形式的时候当改变子级数据时父级数据也会改变
+``this.mymsg.a='改变数据'``
+
+```
+html部分：
+<div id="app">
+    <h1>我是父级，我的数据是=>{{msg1.a}}</h1>
+    <!-- 在这里加入sync方法 -->
+    <my :mymsg.sync="msg1"></my>
+</div>
+
+<template id="bill">
+    <div>
+        <input type="button" value="改变" @click="cg">
+        <h1>我是子级数据=>{{mymsg.a}}</h1>
+    </div>
+</template>
+
+js部分：
+new Vue({
+    el:'#app',
+    data:{
+        msg:'今天天气不错',
+        msg1:{
+            a:'父级数据',
+        },
+    },
+    components: {
+        'my':{
+            methods:{
+                cg:function(){
+                    this.mymsg.a="改变数据";
+                }
+            },
+            props: ['mymsg'],
+            template:'#bill',
+        }
+    }
+})
+```
+----
+#### 组件之间的数据交互方式
+- 首先需要在script中创建一个公共的实例化Vue对象
+``var v = new Vue();``
+- 第二，在传出的地方用``v.$emit()``，第一个参数为``key``，第二个参数为``value``，``key``在接收时会用到
+```
+vm.$emit('a-msg','这里是a组件的数据');
+```
+- 最后，在接收的地方用``$v.on()``接收，第一个参数是传出时的``key``，第二个参数是一个方法，有形参``data``，形参是传过来的数据
+``v.$on('a-msg',(data)=>{console.log(data);});``
+
+----
+**完整代码**：
+```
+html部分：
+
+<div id="app">
+    <my-aaa></my-aaa>
+    <my-bbb></my-bbb>
+    <my-ccc></my-ccc>
+</div>
+<template id="aaa">
+    <input type="button" @click="change" value="我是aaa的按钮">
+</template>
+
+<template id="bbb">
+    <input type="button" @click="change" value="我是bbb的按钮">
+</template>
+
+<template id="ccc">
+    <div>
+        <p>{{a}}</p>
+        <p>{{b}}</p>
+    </div>            
+</template>
+-------------------------------------------------------------------------------
+js部分：
+var vm = new Vue();
+
+new Vue({
+    el:'#app',
+    data:{
+
+    },
+    components:{
+        'my-aaa':{
+            methods: {
+                change(){
+                    //调用了外部的公共对象,传入数据
+                    vm.$emit('a-msg',this.aMsg);
+                }
+            },
+            data(){
+                return {
+                    aMsg:'我是a的数据',
+                }
+            },
+            template:'#aaa'
+        },
+        'my-bbb':{
+            methods: {
+                change(){
+                    //调用了外部的公共对象,传入数据
+                    vm.$emit('b-msg',this.bMsg);
+                }
+            },
+            data(){
+                return {
+                    bMsg:'我是b的数据',
+                }
+            },
+            template:'#bbb'
+        },
+        'my-ccc':{
+            template:'#ccc',
+            data(){
+                return {
+                    a:'暂无a的数据',
+                    b:'暂无b的数据'
+                }
+            },
+            mounted () {
+                //与 $emit()对应的是 $on()
+                vm.$on('a-msg',(data)=>{
+                    console.log(data);
+                    this.a = data;
+                });
+                vm.$on('b-msg',(data)=>{
+                    console.log(data);
+                    this.b = data;
+                });
+            }
+        }
+    }
+})
+</script>
+```

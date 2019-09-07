@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实例4 - el</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="div1"></div>
+    <script>
+        var v = new Vue({
+            el:'#div1',
+            bill:'123',
+            data:{
+                msg:'123',
+                msg2:'456'
+            }
+        });
+        //查找所有属性，也就是Vue对象实例里的所有key值
+        console.log(v.$log());
+    </script>
+</body>
+</html>

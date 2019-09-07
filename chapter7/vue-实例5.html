@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue实例5 - destroy</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    {{msg}}
+    <script>
+        var v = new Vue({
+            el:'body',
+            data:{
+                msg:'hello vue!',
+            }
+        })
+        console.log(v);
+        //清除对象
+        v.$destroy();
+    </script>
+</body>
+</html>

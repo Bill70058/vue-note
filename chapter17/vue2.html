@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}<br/>
+        {{msg.a}}
+    </div>
+
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                msg:{a:10,b:20}
+            },
+            //在这里做一个断点打开控制台可以看到此时页面数据未加载成功
+            beforeMount () {
+                // debugger;
+            },
+            //在这里加一个断点可以明显看到数据加载成功
+            mounted () {
+                // debugger;
+                //相当于ready
+            },
+            //数据更新之前，例如有事件是会改变数据内容的话，这个方法就可以检测到数据更新之前
+            beforeUpdate () {
+                console.log('数据更新之前');
+            },
+            updated () {
+                console.log('数据更新之后');
+            },
+            beforeDestroy () {
+                console.log('实例销毁之前');
+            },
+            destroyed () {
+                console.log('实例销毁之后');
+            }
+        })    
+        window.onclick=function(){
+            app.msg=10;
+            app.$destroy();
+        }
+    </script>
+</body>
+</html>

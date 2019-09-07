@@ -1,0 +1,36 @@
+### vue 2.x 脚手架
+
+- simple 入门
+- webpack 严谨
+- webpack-simple 一般的（常用）
+
+#### 使用
+``vue init webpack-simple filename``
+
+webpack-搭建
+
+> 代码导向
+
+- 所有的东西都可以汇入 app.vue-> main.js->index.js
+
+> 组件结构
+
+- 需要有一个js文件 告诉main.js 组件是什么
+- main.js 告诉app.vue 组件都有什么
+
+#### 全局组件
+
+- src 内创建一个 components 文件夹用于存放全局组件
+- components 内创建需要的组件文件夹，以组件“loading”为例，在components 内创建一个 loading 文件夹
+- 在组件文件夹内需要一个Js文件以及一个或多个的 vue文件，Js 文件用于链接 ``main.js``文件及``.vue``文件，``vue``文件才是真正的组件代码文件
+- 创建一个``loading.js``文件以及``loading.vue``文件
+- ``loading.js``文件内
+    - 需要先导入vue文件 ``import LoadingComponent from './loading.vue'``
+    - 再创建一个静态的对象，对象名为组件名``const Loading = {}``
+    - 对象内需要一个``install``方法用于“下载”组件代码，
+
+
+#### 在脚手架中使用路由
+- 先创建一个路由.vue文件，里面要有``<router-link></router-link>``,``<router-view></router-view>``，作用于也要更改不能重复
+- 然后在App.vue 文件中导入，使用
+- 最后在main.js 文件中导入``vue-router``组件，用``Vue.use()``声明组件，然后创建模板、配置路由、生成路由、启动路由，之后就可以使用了

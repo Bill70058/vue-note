@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue - 父子级组件数据交互</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <aaa :bill="msg" :l="bill"></aaa>
+    </div>
+
+    <template id="aaa">
+        <h1>我是子级组件二</h1>{{bill}}<br>
+        父级数据拿过来是这个=》{{l}}
+    </template>
+    <script>
+        new Vue({
+            el:'#box',
+            data:{
+                msg:'abcd1234',
+                bill:'123'
+            },
+            components: {
+                aaa:{
+                    //props 属性可以获取父级数据，通过子级的标签位置传入自定义属性名获取数据再通过props 属性获取到
+                    props:{
+                        //这样以对象的形式传入不仅传入数据，还要求了数据的类型达到过滤的作用
+                        bill:String,
+                        l:String
+                    },
+                    template:'#aaa',
+                }
+            }
+        })
+    </script>
+</body>
+</html>

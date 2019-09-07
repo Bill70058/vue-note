@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue动画</title>
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" href="../../bower_components/animate.css/animate.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            /* background: black; */
+        }
+        /* 显示时的状态 */
+        .bill-transition{
+            background: black;
+        }
+    </style>
+</head>
+<body>
+    
+    <button @click="change">动起来</button>
+    <!-- 如果要用animate.css 的话要赋予这个类，这个类规定了过渡时间等 -->
+    <div v-show="show" transition="bill" class="animated"></div>
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                show:true,
+            },
+            methods:{
+                change(){
+                    this.show = !this.show;
+                }
+            },
+            //vue 专门放置动画动作的代码作用域
+            transitions:{
+                //自定义动画名作为对象键
+                'bill':{
+                    enterClass:'bounceInDown',
+                    leaveClass:'bounceOut'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

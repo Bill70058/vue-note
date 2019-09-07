@@ -1,0 +1,41 @@
+自定义属性
+
+- 自定义属性分为单向的和双向的
+- 自定义元素 - 属性元素
+
+
+html部分：
+<div v-自定义名字></div>
+
+js部分：
+Vue.directive('自定义名字',function(){
+
+})
+
+Vue.directive('自定义名字', {
+    bind(){
+        初始化数据
+    },
+    update(val){
+        数据改变了就执行这里的语句
+    }
+})
+
+注意：
+    在‘directive’自定义名字有大写的话，html部分的‘自定义名字’
+需要转义，大写换小写，单词之间用‘-’链接，例如：
+    changeColor -> v-change-color
+
+----
+#### 属性元素 - elementDirective
+- 用的和双向自定义属性一样的bing() 方法写，不过没有update() 方法，不能传参
+
+html部分：
+<自定义属性名>在这里写一些内容<自定义属性名>
+
+js部分：
+    Vue.elementDirective('自定义属性名',{
+        bind(){
+            this.el.style.background="red";
+        }
+    })

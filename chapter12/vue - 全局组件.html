@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue - 全局组件</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <aaa></aaa>
+    <script>
+
+        var bill = Vue.extend({
+            template:`<div>
+                <h1>我是组件</h1>
+                <h2>我是h2组件</h2>
+            </div>`
+        });
+        //参数一：组件名，参数二：模板名
+        Vue.component('aaa',bill);
+
+        new Vue({
+            el:'body'
+        })
+    </script>
+</body>
+</html>

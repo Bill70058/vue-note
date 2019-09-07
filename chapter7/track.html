@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>track</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <!-- 通过下标值来改变数据，只要下标值没重复就会一直添加 -->
+    <!-- 如果没有这个的话会通过数据内容来判断 -->
+    <button @click="add" track-by="$index">点击添加</button>
+    <ul v-for="i in arr">
+        <li>{{i}}</li>
+    </ul>
+
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+
+            arr:['迪丽热巴','波多野结衣','小泽玛利亚']
+            },
+            methods:{
+                add:function(){
+                    this.arr.push('本庄铃');
+                }
+            }
+        })
+    </script>
+</body>
+</html>

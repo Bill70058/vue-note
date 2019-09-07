@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>filterBy</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <input type="text" v-model="fil">
+    <ul v-for="i in arr | filterBy fil">
+        <li>{{i}}</li>
+    </ul>
+    <hr/>
+    <h4>也可以将筛选条件写死</h4>
+    这样写的意思是在这个json数组中key值为name的筛选出value中含有‘h’的
+    <ul v-for="i in jsonArr | filterBy 'h' in 'name'">
+        <li>{{i.name}}</li>
+    </ul>
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                fil:'',
+                arr:['leo','bill','jackson','nan','hehe','haha'],
+                jsonArr:[
+                    {name:'hehe'},
+                    {name:'haha'},
+                    {name:'heihei'},
+                    {data:'lalala'}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

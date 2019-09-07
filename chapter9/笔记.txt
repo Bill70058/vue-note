@@ -1,0 +1,46 @@
+bower - 包管理器
+node里有个- npm 也是包管理器，但是他要require导入才能使用
+
+bower - 是前端的包管理器，src 链接就可以使用了
+bower 是npm里的一个包 
+bower 下载包的方式与npm 一样，``bower i vue ``,下载特定
+的版本 ``bower i vue#版本号``
+
+----
+#### 生命周期
+从无到有 - 从有到无 
+
+- created() 实例已经创建
+- beforeCompile() 在实例编译之前
+- compiled() 在实例编译之后执行
+- beforeDestroy() 在销毁之前
+- destroyed () 在销毁之后
+- ready() 可以理解为windows.onload 或 jquery 的 ready
+
+```
+//实例诞生的查看方法
+created(){
+    console.log('实例已经创建');
+},
+//数据未渲染的方法
+beforeCompile(){
+    console.log('在实例编译之前');
+},
+//数据渲染之后执行
+compiled(){
+    console.log('在实例编译之后执行');
+},
+//可以理解为windows.onload 或 jquery 的 ready
+ready(){
+    console.log('实例已经插入文档之后了');
+},
+beforeDestroy(){
+    console.log('在销毁之前');
+},
+destroyed () {
+    console.log('在销毁之后');
+}
+```
+注意：
+    bower 下载安装东西的上层文件夹必须是英文小写，否则
+会报错提示要lowercase

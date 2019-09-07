@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期1</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    
+    <div v-red>{{msg}}</div>
+    <script>
+        Vue.directive('red',function(){
+            this.el.style.color="red";
+            //为什么会在实例编译之前呢？因为此时数据为发生改变
+            console.log('此时颜色发生改变');
+        });
+
+        var v  = new Vue({
+            el:'body',
+            data:{
+                msg:'hello vue!',
+            },
+            //实例诞生的查看方法
+            created(){
+                console.log('实例已经创建');
+            },
+            //数据未渲染的方法
+            beforeCompile(){
+                console.log('在实例编译之前');
+            },
+            //数据渲染之后执行
+            compiled(){
+                console.log('在实例编译之后执行');
+            },
+            //可以理解为windows.onload 或 jquery 的 ready
+            ready(){
+                console.log('实例已经插入文档之后了');
+            },
+            beforeDestroy(){
+                console.log('在销毁之前');
+            },
+            destroyed () {
+                console.log('在销毁之后');
+            }
+        });
+
+        //销毁之后
+        onclick = function(){
+            v.$destroy();
+        }
+    </script>
+</body>
+</html>

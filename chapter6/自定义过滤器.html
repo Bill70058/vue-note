@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义过滤器</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    {{msg | bill}}
+    <hr/>
+    <input type="number" value="1" v-model="v" step="1" min="1" max="" id="diy"><br/>
+    {{msg2 | change v}}
+    <script>
+        Vue.filter('bill',function(val){
+            console.log(val);
+            return val.toUpperCase();
+        });
+        //自定义过滤器之将特定位置的字母转为大写
+        Vue.filter('change', function(val,num){
+            var st = val.substring(0,num-1);
+            // console.log(num, st);
+            var sl = val.substring(num);
+            return st+val[num-1].toUpperCase()+sl;
+        })
+       var a = new Vue({
+            el:'body',
+            data:{
+                v:1,
+                msg:'abcd',
+                msg2:'asdfdsafasdf',
+            }
+            
+        });
+        diy.max=a.msg2.length;
+    </script>
+</body>
+</html>

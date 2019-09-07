@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>我是父级，我的数据是=>{{msg1.a}}</h1>
+        <!-- 在这里加入sync方法 -->
+        <my :mymsg.sync="msg1"></my>
+    </div>
+
+    <template id="bill">
+        <div>
+            <input type="button" value="改变" @click="cg">
+            <h1>我是子级数据=>{{mymsg.a}}</h1>
+        </div>
+    </template>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'今天天气不错',
+                msg1:{
+                    a:'父级数据',
+                },
+            },
+            components: {
+                'my':{
+                    methods:{
+                        cg:function(){
+                            this.mymsg.a="改变数据";
+                        }
+                    },
+                    props: ['mymsg'],
+                    template:'#bill',
+                }
+            }
+        })
+    </script>
+</body>
+</html>

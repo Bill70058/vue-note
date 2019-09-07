@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性元素</title>
+    <script src="../vue.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+<bill-red>fdasfdas</bill-red>
+
+  <script>
+      //不能传参
+    Vue.elementDirective('bill-red',{
+        bind(){
+            this.el.style.background="red";
+        }
+    })
+
+
+        new Vue({
+            el:'body',
+            data:{
+                //v-bill是vue方法，所以这里需要给一个vue 属性用于绑定
+                blue:'color',
+            }
+        })
+    </script>
+</body>
+</html>

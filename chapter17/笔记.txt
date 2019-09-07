@@ -1,0 +1,90 @@
+vue 2.0x 目前最高版本是2.6.10 19/7/18
+
+### vue 1.0与2.0的区别
+#### 1、作用域区别/根元素
+- 1.0中作用域可以随便定义，但是2.0不能使用html/body元素作为作用域标签
+
+----
+#### 2、json
+1.0中如果想显示json类型的数据需要使用过滤器json -- “{{msg | json}}”，否则只会显示类型[object Object]
+2.0中直接将数据显示，不需要过滤器 "{{msg}}"
+
+----
+#### 3、生命周期
+created 实例已经创建
+beforeCompile 编译之前
+compiled 编译之后
+ready 实例已经插入到文档之中
+beforeDetroy 实例在销毁之前
+destroyed 实例销毁之后
+
+2.0
+beforeCreate 创建实例之前/刚刚创建实例 属性与数据都还没有加载完成
+created 创建完毕，属性已经绑定好了，数据已加载完成
+beforeMount 模板在渲染之前 
+mounted 渲染之后 // 相当于ready()
+beforeUpdate 数据更新前
+updated 数据更新后
+beforeDestroy 实例销毁之前
+destroyed 实例销毁之后
+
+----
+#### 4、遍历
+在1.0中 假如有data是数组或json，遍历查看下标与值可以用``v-for="(index,value) in msg``"{{index}}=> {{value}}
+但是在2.0中 key与value的顺序是反的 ``v-for="(value,index) in msg"``{{index}}=> {{value}}
+1.0中想查看index可以用$index,想查看key可以用$key
+但是2.0中这两个都没有了，只能通过``(value,key) in msg/(value,index) in msg ``查看
+
+----
+#### 5、过滤器
+1.0中是有自带过滤器的，2.0中所有自带的过滤器都没了，要自己编写
+封装方式没区别
+```
+Vue.filter('过滤器名',(val)=>{
+    return ...;
+});
+```
+例如 -- 字母大写过滤器：
+```
+Vue.filter('uppercase',(val)=>{
+    return val.toUpperCase();
+})
+```
+#### 过滤器传参
+1.0中过滤器直接后接参数即可，但2.0需要你用函数的方式传参
+
+- 1.0传参：
+```
+html 部分：
+{{msg | uppercase "1" "2"}}
+vue 部分：
+Vue.filter('uppercase', (val,num,num2)=>{
+    console.log(num,num2);
+    return val.toUpperCase();
+})
+```
+
+- 2.0传参：参数需要用括号括起来像函数传参一样
+```
+html 部分：
+{{msg | uppercase('1','2')}}
+vue 部分：
+Vue.filter('uppercase', (val,num,num2)=>{
+    console.log(num,num2);
+    return val.toUpperCase();
+})
+```
+
+----
+#### 6、组件
+2.0中组件在template标签中写组件代码时必须有根元素，而1.0不用根元素包裹
+```
+<template id="a">
+    <div>
+        <h1>今天天气不错</h1>
+        <h1>今天天气不错运气应该也不错</h1>
+    </div>
+</template>
+``` 
+如果没有根元素包裹的话会有这个报错``Component template should contain exactly one root element. If you are using v-if on multiple elements, use v-else-if to chain them instead.``
+

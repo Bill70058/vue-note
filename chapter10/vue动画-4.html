@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../bower_components/vue/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../../bower_components/animate.css/animate.css"/>
+	</head>
+	<body>
+		<div id="app">
+			<button type="button" @click="move()">click</button>
+			<transition
+			name="bounce"
+			enter-active-class="animated tada"
+			leave-active-class="animated bounceOutRight"
+			>
+				<p v-show="show">here have a test sentence</p>
+			</transition>
+		</div>
+		<script type="text/javascript">
+			new Vue({
+				el:'#app',
+				data:{
+					show: true
+				},
+				methods:{
+					move:function(){
+						this.show = !this.show;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-父子级之间数据互传</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <!-- 在父级标签处将父级数据以在子级props 命的名为昵称，以昵称为标准，打印的时候也是 -->
+    <!-- 这有些类似于继承，用昵称继承了父级的数据 -->
+    <aaa :get-p="msg"></aaa>
+    <template id="bill">
+        <h1>我是组件1</h1>
+        <!-- 在父级拿到子级的数据 -->
+        <div>这个是子级数据{{msg2}}</div>
+        <!-- 在子级拿到父级的数据 -->
+        <div>这个是我父级的数据{{getP}}</div>
+    </template>
+
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                msg:'1234',
+            },
+            components:{
+                'aaa':{
+                    template:'#bill',
+                    props:['getP'],
+                    data(){
+                        return {
+                            msg2:'hehehe',
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

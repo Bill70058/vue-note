@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>debounce 延迟选择器</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <input type="button" value="click" id="ipt" @click="add | debounce '1000'">
+
+    <script>
+        new Vue({
+            el:'body',
+            methods:{
+                add:function(){
+                    ipt.style.display='none';
+                }
+            }
+        })
+    </script>
+</body>
+</html>

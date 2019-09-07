@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <input type="text" v-model="msg">
+    <br/>首字母大写：{{msg | capitalize}}
+    <br/>所有字母大写：{{msg | uppercase}}
+    <br/>所有字母小写：{{msg | lowercase}}
+    <br/>货币形式输出：{{msg | currency}}
+    <br/>人名币形式输出：{{msg | currency '￥'}}
+    <br/>后接三位小数：{{msg | currency '￥' '3'}}
+    <br/>普通的复数使用：{{msg2 | pluralize '哈哈哈'}}
+    <br/>
+
+    <hr/>
+    <h4>当传递不同数量的参数的时候会有不同效果</h4>
+    <ul v-for="i in arr">
+        <li>{{i}}</li>
+    </ul>
+    <hr/>
+    <ul v-for="i in arr">
+            <li>{{i | pluralize "哈哈"}}</li>
+    </ul>
+    <hr/>
+    <ul v-for="i in arr">
+            <li>{{i | pluralize "哈哈" "嘿嘿"}}</li>
+    </ul>
+    <hr/>
+    <ul v-for="i in arr">
+            <li>{{i | pluralize "哈哈" "嘿嘿" "呵呵"}}</li>
+    </ul>
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                msg:'',
+                msg2:'',
+                arr:[1,2,3],
+            }
+        })
+    </script>
+</body>
+</html>

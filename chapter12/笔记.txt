@@ -1,0 +1,164 @@
+组件 - 多行代码做的模块
+
+vue - 全局组件
+- template 如果想写多行语句的话要用esc 键下方的‘点’键（英文状态下的）
+- 确定Vue 作用域是必不可少的，而且要将Vue 实例放在最下方
+
+```
+var 模板名 = Vue.extend({
+    template:'写入需要的html元素'
+});
+Vue.component('自定义标签名', 模板名);
+
+new Vue({
+    el:'body'
+})
+```
+
+##### 如果想在模板里使用data 
+- 组件里data 不同于Vue 实例的data
+- 组件里的的data 必须是一个函数，并且想要输出内容必须用return
+
+```
+var 自定义模板名 = Vue.extend({
+    data(){
+        return {
+            msg:'我是组件语句1的msg',
+            msg2:'我是组件语句2的msg'
+        }
+    },
+    template:`<div>
+        <h1>我是组件{{msg}}</h1>
+        <h2>我是h2组件{{msg2}}</h2>
+    </div>`
+});
+```
+
+----
+#### 局部组件
+
+```
+new Vue({
+    el:'局部作用域',
+    components:{
+        标签的名字: 模板名
+    }
+})
+```
+
+##### 局部组件简化写法
+- 局部组件 components 属性可以传入一个对象，而这个对象的内容可以是自定义模板的内容，这样就省去了在实例外部的书写了
+- 组件的‘闭包’，组件属性 - components 拿不到除了自身data() 以外的其他数据
+- 可以将components 内的'aaa':{} 理解为一个新的vue 实例，在里面也有methods、template等方法
+```
+new Vue({
+    el:'.div1',
+    components: {
+        'aaa':{
+            data(){
+                return {
+                    msg:'hello, i am vue components',
+                }
+            },
+            template:`<h1>i am inside component{{msg}}`,
+        }
+    }
+})
+```
+
+----
+##### 组件模板 - template
+- 原先在components 内的template 属性值可以流出，在html 部分书写
+- 要想流出要在components 内 的template 赋予一个id 值，在html 部分的template 标签赋予同样的id 值
+```
+html部分：
+<template id="bill">
+        <h1>i am inside component{{msg}}</h1>
+        <input type="button"  value="click" @click="add">
+        
+</template>
+
+js部分：
+new Vue({
+    el:'.div1',
+    components: {
+        'aaa':{
+            data(){
+                return {
+                    msg:'hello, i am vue components',
+                }
+            },
+            methods: {
+                add(){
+                    this.msg='hehehehehe';
+                }  
+            },
+            // 将template 流出，流出需要给template 一个id 指向，然后就可以在html 部分书写原来在js 部分的内容了
+            template:'#bill',
+        }
+    }
+})
+```
+
+template 总结：
+- template 有三种方法
+    - 一种是直接在components 内写html 代码
+    - 第二种是给个id 让template 流出在html 写代码
+    - 第三种是用js 文件引入，但这个方法用起来推荐就不详细写了
+
+----
+##### 动态组件
+- <component> 标签，这个标签内有个 :is 属性，is 属性是那个组件，就把名字给is属性即可
+
+
+----
+#### 父子级组件关系
+- 组件是可以无限嵌套组件的，不过只能套自己下面的第一层组件
+- 父子级数据交互
+    - 父子级数据交互有两种方式从父级获取到数据
+        - 第一种是
+            ```
+            props:['数据名',...]
+            ```
+        - 第二种是
+        ```
+        props:{
+            数据名: 数据类型,
+            ...
+        }
+        ``
+    - 以第二种方式不仅达到获取数据的效果，还达到过滤数据的效果，因为他只会传入类型符合的数据
+
+- 子级传数据给父级的话就要从子级的component内设置data() return 数据，设置完子级数据之后父级标签下用vue 模板{{}} 打印
+- 子级传数据给父级用$emit() 方法传：
+    - 首先在父级的template 中起一个事件，事件放置在子级的methods 中，事件内容为``this.$emit('随意起的名字用于接收',要发送的本级数据);``
+    - 父级的template 中有调用到子级的标签，在子级标签内有个刚刚在子级emit 中定义的发送名字为vue 事件作为属性名接收，接收也是自定义名字用于在父级methods 中作为事件名``<children @自定义发送的名字="接收的名字"></children>``
+    - 在父级的methods 中以接收的自定义名作为方法，传入形参，其中的形参是子级一步步发送过来的数据，也就是子级的数据
+
+总结： 父级拿子级的直接在模板内拿，拿到后标签打印时可以直接打印出来，
+子级拿父级需要在标签处起一个昵称起到继承父级数据的作用，再在子级props内
+填入昵称，打印是在模板处打印，但是{{}} 内是填入昵称名.
+从父级拿数据比较简单，就props 拿就行了，但是从子级传数据到父级比较难，要一重一重用emit往上传
+
+注意：子级拿父级数据时，数据是现成的，没有风险，但是父级拿子级
+数据时有一定风险，因为不知道子级此时是否有数据，所以不一定拿得到，保险起见用@emit() 方法
+
+----
+#### slot标签  -- 位置替换
+- 我们的组件可以放入任何的html 代码，如果想让自定义的标签内的html 代码也显示的话
+，需要在template 内使用``slot`` 标签，使用了这个标签之后，可以理解为它的位置和自定义标签内的内容替换了，
+也就是说相当于自定义标签内的内容都写在template 里了。
+- 想要精准的让一个slot 标签对应自定义标签内的代码行的时候需要用到``slot``属性与``name``属性,
+``slot`` 属性是在自定义标签内的代码行赋予的，``name`` 属性是在template 内的对应``slot 标签``内赋予的
+```
+<bill>
+    <h1 slot="h1-slot">今晚好像又不下雨了-- slot-h1</h1>
+    <h2 slot="h2-slot">虽然今晚不下雨，但鼻炎还是犯了 -- slot-h2</h2>
+</bill>
+<template id="bill">
+    <h1>今天刮台风 -- 组件1</h1>
+    <slot name="h1-slot"></slot>
+    <h3>注意，这里的语句他有按照顺序排列</h3>
+    <slot name="h2-slot"></slot>
+</template>
+```

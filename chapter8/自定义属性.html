@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义属性</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div v-bill>我是个div</div>
+    <div v-bill>我是个div</div>
+    <div v-bill>我是个div</div>
+    <div v-bill>我是个div</div>
+    <div v-bill>我是个div</div>
+    <script>
+        //通过属性选择器控制
+        Vue.directive('bill',function(){
+            console.log(this);
+            //这个对象内也有el 属性显示作用域
+            this.el.style.cssText='height:auto;background:black;color:white';
+            //如果在拥有这个属性的标签作用域内发生点击事件的话则
+            this.el.onclick=function(){
+                this.style.color='green';
+            }
+        });
+        new Vue({
+            el:'body',
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slot 方法</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <bill>
+        <h1>今晚好像又不下雨了</h1>
+        <h2>虽然今晚不下雨，但鼻炎还是犯了</h2>
+    </bill>
+    <template id="bill">
+        <h1>今天刮台风 -- 组件1</h1>
+        <slot></slot>
+        <h3>注意，这里的语句他有按照顺序排列</h3>
+    </template>
+    <script>
+        new Vue({
+            el:'body',
+            components:{
+                bill:{
+                    template:'#bill',
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

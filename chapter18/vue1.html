@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-aaa></my-aaa>
+    </div>
+    <template id="aaa">
+        <div>
+            <p>这里是组件aaa</p>
+            <p>必须有一个根元素包裹</p>
+        </div>
+    </template>
+    <script>
+        new Vue({
+            el:'#app',
+            components:{
+                'my-aaa':{
+                    template:'#aaa'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

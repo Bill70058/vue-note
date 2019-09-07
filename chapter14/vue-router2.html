@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./vue-router.js"></script>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <a v-link="{path:'/home'}">首页</a>
+        <a v-link="{path:'/news'}">新闻</a>
+        <router-view name="path"></router-view>
+    </div>
+
+    <template id="a">
+        <h1>我是首页</h1>
+    </template>
+    <template id="b">
+        <h1>我是新闻页</h1>
+    </template>
+
+    <script>
+    var app = Vue.extend();
+    var router = new VueRouter();
+    router.map({
+        'home':{
+            components: {
+                template:'#a'
+            }
+        },
+        'news':{
+            component:{
+                template:'#b'
+            }
+        }
+    });
+    router.start(app,'#box');
+    </script>
+</body>
+</html>

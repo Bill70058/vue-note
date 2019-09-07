@@ -1,0 +1,47 @@
+vue 1.0 脚手架
+vue 已经版我们搭好框架了，我们直接写内容就好了
+
+simple -- 这个脚手架太入门了，没什么用，自己平时都是这样写
+webpack
+webpack-simple
+
+脚手架是npm 包里的一个包
+vue-cli
+cnpm i vue-cli -g 全局下载
+查看版本号 vue -V
+初始化脚手架文件 - 
+simple版：
+vue init simple#版本号 指定文件
+
+webpack版：
+vue init webpack#版本号 指定文件名
+创建完之后需要操作的步骤
+     cd 文件名      //进入创建的文件夹
+     npm install   //下载需要用到的模块/依赖
+     npm run dev   //运行 -- 在package.json 文件可以看到dev的key值为 node build/dev-server.js，启动完会提供个端口，一般为8080 -- http://localhost:8080，在浏览器访问即可
+    
+如果不用接口什么的对我们来说有用的就只有src文件内的App.vue，这里存放的是模块内容，main.js是主要文件，引入Vue框架与App模块文件进行输出
+
+外部引入文件代码：import 自定义名字 form 地址；这是es6 的语法
+
+在引入文件中书写内容要：
+export default{
+    data(){
+        在这里面写内容
+    }
+}
+
+webpack 自带差错，如果你多了一个空格或多了一个引号或引号不同之类的他就会报错告诉你运行不了
+
+webpack-simple版：
+这个版本介于simple与webpack之间，不是很简单也不会太难，像webpack版连个空格都不能错就太变态了
+这个版本比较友善
+这个版本只有两个文件 -- App.vue 与 main.js，在webpack版，这两个文件是在src文件内的，也就是说webpack-simple版只留了webpack版的内容文件
+一个模块文件导入，一个主文件文件输出
+
+webpack-simple 模块书写步骤：
+1、创建一个vue文件 xxx.vue
+2、template 块、script 块、style块
+3、在App.vue 中用es6 的语法引入你的vue文件 import 自定义组件名 from './vue文件.vue'，
+在App.vue 的export default 中要添加你的自定义模块名
+- 自定义的vue文件相当于是模板，在App.vue中引入时定义的自定义组件名就是组件

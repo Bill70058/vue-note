@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue - 全局组件</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <aaa></aaa>
+    <script>
+
+        var bill = Vue.extend({
+            data(){
+                return {
+                    msg:'我是组件语句1的msg',
+                    msg2:'我是组件语句2的msg'
+                }
+            },
+            template:`<div>
+                <h1>我是组件{{msg}}</h1>
+                <h2>我是h2组件{{msg2}}</h2>
+            </div>`
+        });
+        //参数一：组件名，参数二：模板名
+        Vue.component('aaa',bill);
+
+        new Vue({
+            el:'body'
+        })
+    </script>
+</body>
+</html>

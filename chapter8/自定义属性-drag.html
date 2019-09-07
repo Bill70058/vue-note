@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义属性-拖拽</title>
+    <script src="../vue.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div v-drag :style="{height:'200px',width:'200px',background:'black',position:'absolute'}"></div>
+
+<!-- 当自定义属性名中是驼峰命名法有大写字母的时候要在html部分转义自定义属性名将所有字母都小写，两个单词之间用‘-’链接 -->
+<div v-random-color></div>
+
+    <script>
+        Vue.directive('randomColor',function(){
+            this.el.style.cssText='height:200px;width:200px;background:green;margin-left:300px;';
+            this.el.onclick=function(){
+                this.style.background="rgb("+ parseInt(Math.random()*256) +","+ parseInt(Math.random()*256) +","+ parseInt(Math.random()*256) +")";
+            }
+        })
+
+        Vue.directive('drag',function(){
+            this.el.onmousedown=function(e){
+                var ev = e || event;
+                var l = ev.clickX - this.offsetLeft;
+                var t = ev.clickY - this.offsetTop; 
+                document.onmousemove=function(e){
+                    var ev = e || event;
+                    this.style.left=ev.clickX-l+'px';
+                    this.style.top=ev.clickY-t+'px';
+                }.bind(this);
+                document.onmouseup=function(){
+                    this.onmousemove=this.onmouseup=null;
+                };  
+            }
+        });
+        new Vue({
+            el:'body',
+        })
+    </script>
+</body>
+</html>

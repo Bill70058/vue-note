@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+    <!-- {{c=3}} 函数赋值 -->
+    {{c}}
+
+    <script>
+        //怎么传参
+        var a = new Vue({
+            el:'body',
+            data:{
+                a:10,
+                b:20,
+            },
+            computed:{
+                //不传参调用get方法，传参调用set方法
+                c:{
+                    //get 方法不传递参数的话就是普通返会调用
+                    get:function(){
+                        return 10;
+                    },
+                    set:function(v){
+                        this.b=v+this.a;
+                    }
+                }
+            }
+        })  
+        //这行代码是传参，传递到set里，也就是v=40
+        a.c=40;
+        console.log(a.b); 
+    </script>
+</body>
+</html>

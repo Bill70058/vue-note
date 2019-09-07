@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue- 实例</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    {{msg}}
+
+<script>
+    var a = new Vue({
+        data:{
+            msg:'hello Vue!',
+        }
+    }).$mount('body');
+    console.log(a.$data);
+    a.$data.msg='改变的数据';
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-实例2：el</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="div1"></div>
+    
+    <script>
+        var v = new Vue({
+            el:'#div1',
+        });
+        v.$el.style.cssText="height:200px;width:200px;background:black;";
+        //jquery 写法
+        //$(v.$el).css('width','200px');
+    </script>
+</body>
+</html>

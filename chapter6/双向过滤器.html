@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向过滤器</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <input type="text" v-model="msg | filterHtml">
+{{{msg}}}
+
+    <script>
+        Vue.filter('filterHtml',{
+            read:function(input){
+                // console.log(input);
+                return input;
+            },
+            write:function(val){
+                // console.log(val);
+                //正则表达式筛选去除标签让数据以字符串形式输出
+                return val.replace(/<[^<]+>/g,'');
+            }
+        })
+
+        new Vue({
+            el:'body',
+            data:{
+                msg:'<span>hehehhehe</span>',
+            }
+        })
+    </script>
+</body>
+</html>

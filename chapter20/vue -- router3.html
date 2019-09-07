@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue -- router3,路由套路由</title>
+    <script src="../bower_components/vue/dist/vue.js"></script>
+    <script src="./bower_components/vue-router/dist/vue-router.js"></script>
+    <link rel="stylesheet" href="../../bower_components/animate.css/animate.css">
+<style>
+        a{
+            transition: .5s;
+        }
+        .router-link-exact-active{
+            font-size: 20px;
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/liu">刘备</router-link>
+        <router-link to="/guan">关羽</router-link>
+        <router-link to="/zhang">张飞</router-link>
+
+        <transition enter-active-class="animated bounceInLeft" leave-active-class="animated bounceInRight">
+            <router-view></router-view>
+        </transition>
+
+    </div>
+
+    <template id="name">
+        <p>我是汉昭烈帝</p>
+    </template>
+
+    <template id="liu">
+        <div>
+            <p>我是刘备</p>
+            <router-link to="/liu/name">关于我的昵称</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+
+    <template id="weapon">
+        <p>我叫关羽，我的武器是青龙偃月刀</p>
+    </template>
+    <script>
+
+        //创建模板
+        var liu = {
+            template:`<div>
+                <p>我是刘备</p>
+                <router-link to='/liu/name'>关于我的昵称</router-link>
+                <router-view></router-view>
+                </div>`
+        };
+        var guan = {
+            template:`<div>
+                    <p>我是关羽</p>
+                    <router-link to="/guan/weapon">我的武器是</router-link>
+                    <router-view></router-view>
+                </div>` 
+        };
+        var zhang = {
+            template:'<p>我是张飞</p>'
+        }
+
+        var name = {
+            template:'<p>我是汉昭烈帝</p>'
+        }
+        //配置路由
+        var routes = [
+            {
+                path:'/liu',
+                component:{template:'#liu'},
+                children:[
+                    {
+                        path:'/name',
+                        component:{
+                            template:'#name'
+                        }
+                    }
+                ]
+            },
+            {
+                path:'/guan',
+                component:guan,
+                children:[
+                    {
+                        path:'/weapon',
+                        component:{template:'#weapon'}
+                    }
+                ]
+            },
+            {path:'/zhang',component:zhang},
+            {path:'/',redirect: '/liu'}
+
+        ];
+
+        //创建路由
+        var router = new VueRouter({
+            routes
+        });
+
+        //启动路由
+        new Vue({
+            router,
+            el:'#app'
+        })
+    </script>
+</body>
+</html>

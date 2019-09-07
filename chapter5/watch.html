@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>watch</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <input type="button" value="改变" @click="change">
+
+    <script>
+        var a = new Vue({
+            el:'body',
+            data:{
+                a:10,
+                b:20,
+            },
+            methods:{
+                change:function(){
+                    this.a=20;
+                }
+            }
+        });
+        a.$watch('a',function(){
+            console.log('改变了');
+        })
+    </script>
+</body>
+</html>

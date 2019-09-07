@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue动画</title>
+    <script src="../vue.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            /* background: black; */
+        }
+        /* 显示时的状态 */
+        .bill-transition{
+            opacity: 1;
+            transition: 1.3s;
+            transform: translate(0,0);
+            background: black;
+        }
+        /* 动画离开动作 */
+        .bill-leave{
+            opacity: 0;
+            /*消失时从左往右消失*/
+            transform: translateX(90px);
+            background: pink;
+        }
+        /* 动画进入到显示过程的过渡动画 */
+        .bill-enter{
+            opacity: 0;
+            /* 进入时从下到上显示 */
+            transform: translateY(90px);
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    
+    <button @click="change">动起来</button>
+    <div v-show="show" transition="bill"></div>
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                show:true,
+            },
+            methods:{
+                change(){
+                    this.show = !this.show;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

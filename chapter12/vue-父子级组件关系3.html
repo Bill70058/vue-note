@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue - 父子级组件数据交互</title>
+    <script src="../vue.js"></script>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    #outNode{
+        height: 200px;
+        width: 200px;
+        border: 1px solid black;
+        position: relative;
+        overflow: hidden;
+    }
+    #outNode>div{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+    input{
+        margin: 5px;
+    }
+    input.active{
+        background: red;
+    }
+    .bill-transition{
+        opacity:1;
+        transition: 0.5s linear; 
+        transform: translateX(0);
+    }
+    .bill-enter{
+        /* opacity: 0; */
+        transform: translateX(200px);
+    }
+    .bill-leave{
+        /* opacity: 0; */
+        transform: translateX(-200px);  
+    }
+    </style>
+</head>
+<body>
+    <input type="color" v-model="color">
+    <button @click="add">添加</button>
+    <tab :input-value="msg" :inner-value="msg2"></tab>
+    <template id="tab">
+    <input type="button" v-for="i in inputValue" :value="i" :class="index==$index?'active':''" @click="add($index)" track-by="$index">
+    <div id="outNode">
+        <div v-for="i in innerValue" :style="{background:i}" v-show="index==$index?true:false" transition="bill" track-by="$index">{{i}}</div>
+    </div>
+    </template>
+
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                msg:['1','2','3'],
+                msg2:['yellow','red','green'],
+                color:''
+            },
+            methods:{
+                add(){
+                    this.msg.push(this.color);
+                    this.msg2.push(this.color);
+                    // this.msg.push('5');
+                    // this.msg2.push('gray');
+                }
+            },
+            components: {
+                tab:{
+                    props: ['inputValue','innerValue'],
+                    template:'#tab',
+                    data(){
+                        return {
+                            inputValue:['bill','city','mary'],
+                            innerValue:['yellow','red','green'],
+                            index:0,
+                            over:false
+                        }
+                    },
+                    methods: {
+                    add(i){
+                        if(this.over) return;
+                        this.over=true;
+                        this.index=i;
+                        var _this = this;
+                        //这里加了个时间开关控制用户点击频率，让加了这个让动画不会因为过快而倒退显示
+                        setTimeout(() => {
+                            _this.over=false;
+                        }, 500);
+                    }
+            }
+                },
+
+            }
+        })
+    </script>
+</body>
+</html>

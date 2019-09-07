@@ -1,0 +1,32 @@
+### vue2.x 动画
+
+#### 1.x 动画
+> css:
+- transtion = 'fade'
+    - .fade-transition
+    - .fade-enter
+    - .fade-leave
+> js:
+transitions:{
+    'fade':{
+        enterClass:'',
+        leaveClass:''
+    }
+}
+
+- v-show='false/true' 
+     - 如果是false就是transition -> leave
+    - 如果是true就是enter -> transition 
+
+----
+#### 2.x动画
+- 运动不再在元素上写了，而是专门有一个容器帮助我们运动
+```
+<transition>
+    要运动的元素
+</transition>
+```
+- fade-enter        :进入之前的状态
+- fade-enter-active :进入之后的状态
+- fade-leave        :消失之前的状态
+- fade-leave-active :消失之后的状态

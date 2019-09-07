@@ -1,0 +1,19 @@
+实例方法：
+$mount() 这个也是定义Vue实例作用域的，不过级别没有‘el’高
+$data 就是Vue对象内的data
+$el 可以帮我们获取原生的dom对象
+$options 获取自定义属性/正常属性
+$log() 快速看到data的内容，作用类似$data 不过不用点击进去都可以查看到data的值，不能修改data里的值，只能看
+$destroy 销毁对象
+
+v-track：根据下标值来添加数组值，而不是根据数组内容，如果根据数组内容的话不能重复，如果根据下标索引的话可以重复
+```
+<button @click="add" track-by="$index">点击添加</button>
+<ul v-for="i in arr">
+    <li>{{i}}</li>
+</ul>
+```
+
+v-cloak :[官方API](https://cn.vuejs.org/v2/api/#v-cloak)
+这个起到一个遮罩层的作用，一般网页页面加载的话会有些延迟，有些你不想
+让他这么快显示的会隐藏，但是页面加载的话会有些延迟导致用户会有一瞬间看得到，用这个属性的话可以起到遮罩隐藏的作用

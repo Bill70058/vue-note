@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>emit() 方法</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <bill>
+        
+    </bill>
+    
+    <template id="bill">
+        <h1>我是父级的数据=> {{msg}}</h1>
+        <h2>这是我拿到的孙子级数据=》 {{msg2}}</h2>
+        <children @child-msg="getmsg"></children>
+    </template>
+    <template id="children">
+        <h1>我是孙子级的数据=> {{msg}}</h1>
+        <input type="button" @click="emitNode" value="click">
+    </template>
+    <script>
+        new Vue({
+            el:'body',
+            components:{
+                'bill':{
+                    template:'#bill',
+                    data(){
+                        return {
+                            msg:'我是父级数据',
+                            msg2:'',
+                        }
+                    },
+                    methods: {
+                        //注意：这里形参msg 是child-msg事件传入的数据，也就是在相对子级中emit 方法传入的数据 -- 孙子级数据
+                        getmsg(msg){
+                            // console.log(msg);
+                            this.msg2=msg;
+                        }
+                    },
+                    components:{
+                        'children':{
+                            template:'#children',
+                            data(){
+                                return{
+                                    msg:'我是孙子级的数据',
+                                }
+                            },
+                            methods: {
+                                emitNode(){
+                                    //第一个参数是传递的名字，第二个参数是传递的信息
+                                     this.$emit('child-msg',this.msg);
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

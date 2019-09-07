@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue - 全局组件</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="div1"><aaa></aaa></div>
+    <script>
+        new Vue({
+            el:'.div1',
+            components: {
+                'aaa':{
+                    data(){
+                        return {
+                            msg:'hello, i am vue components',
+                        }
+                    },
+                    template:`<h1>i am inside component{{msg}}`,
+                }
+            }
+        })
+    </script>
+</body>
+</html>

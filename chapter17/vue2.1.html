@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>首页</title>
+        <script src="../bower_components/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div v-for="i in value">{{i}}</div>
+            <!-- 1.x与2.x的顺序是反的，1.x是 key-value，2.x是value-key -->
+            <div v-for="(value,index) in value">{{index}}=>{{value}}</div>
+            {{msg | uppercase}}
+        </div>
+
+        <script>
+            Vue.filter('uppercase',(val)=>{
+                return val.toUpperCase();
+            })
+            new Vue({
+                el:'#app',
+                data:{
+                    value:[1,2,3,4],
+                    msg:'fdsafdksafajlk'
+                }
+            })    
+        </script>
+    </body>
+</html>

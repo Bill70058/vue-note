@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>orderBy</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <h4>1 为升序，上至下是从小到大，-1 为降序，上至下是从大到小</h4>
+    <input type="text" v-model="order">
+    <ul v-for="i in arr | orderBy order">
+        <li>{{i}}</li>
+    </ul>
+    <script>
+       var a =  new Vue({
+            el:'body',
+            data:{
+                arr:[1,3,2,4,0],
+                order:'',
+            }
+        });
+        a.$watch('order',function(){
+            a.order = Number(a.order);
+        })
+       
+    </script>
+</body>
+</html>

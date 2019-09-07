@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>vue2.x -- 同级数据传递</title>
+        <script src="../bower_components/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <my-aaa></my-aaa>
+            <my-bbb></my-bbb>
+            <my-ccc></my-ccc>
+        </div>
+        <template id="aaa">
+            <input type="button" @click="change" value="我是aaa的按钮">
+        </template>
+        
+        <template id="bbb">
+            <input type="button" @click="change" value="我是bbb的按钮">
+        </template>
+
+        <template id="ccc">
+            <div>
+                <p>{{a}}</p>
+                <p>{{b}}</p>
+            </div>            
+        </template>
+        <script>
+            var vm = new Vue();
+
+            new Vue({
+                el:'#app',
+                data:{
+
+                },
+                components:{
+                    'my-aaa':{
+                        methods: {
+                            change(){
+                                //调用了外部的公共对象,传入数据
+                                vm.$emit('a-msg',this.aMsg);
+                            }
+                        },
+                        data(){
+                            return {
+                                aMsg:'我是a的数据',
+                            }
+                        },
+                        template:'#aaa'
+                    },
+                    'my-bbb':{
+                        methods: {
+                            change(){
+                                //调用了外部的公共对象,传入数据
+                                vm.$emit('b-msg',this.bMsg);
+                            }
+                        },
+                        data(){
+                            return {
+                                bMsg:'我是b的数据',
+                            }
+                        },
+                        template:'#bbb'
+                    },
+                    'my-ccc':{
+                        template:'#ccc',
+                        data(){
+                            return {
+                                a:'暂无a的数据',
+                                b:'暂无b的数据'
+                            }
+                        },
+                        mounted () {
+                            //与 $emit()对应的是 $on()
+                            vm.$on('a-msg',(data)=>{
+                                console.log(data);
+                                this.a = data;
+                            });
+                            vm.$on('b-msg',(data)=>{
+                                console.log(data);
+                                this.b = data;
+                            });
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

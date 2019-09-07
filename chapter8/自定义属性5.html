@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义属性5</title>
+    <script src="../vue.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" v-model="blue">
+    <div v-bill="blue" :style="{width:'200px',height:'200px'}"></div>
+    <script>
+        Vue.directive('bill',{
+            //初始数据
+            bind(){
+                this.el.style.background="blue";
+            },
+            //当数据改变了就执行这里的代码，可以传参
+            update(val){
+                // console.log(1);
+                this.el.style.background=val;
+            }
+          })
+        new Vue({
+            el:'body',
+            data:{
+                //v-bill是vue方法，所以这里需要给一个vue 属性用于绑定
+                blue:'color',
+            }
+        })
+    </script>
+</body>
+</html>

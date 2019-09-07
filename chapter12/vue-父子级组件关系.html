@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue - 全局组件</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <aaa></aaa>
+    </div>
+    <template id="aaa">
+        <h1>我是子级组件一</h1>
+        <bbb></bbb>
+    </template>
+    <template id="bbb">
+        <h1>我是子级组件二</h1>
+    </template>
+    <script>
+        new Vue({
+            el:'#box',
+            data:{
+                msg:'aaa',
+            },
+            components: {
+                aaa:{
+                    template:'#aaa',
+                    components:{
+                        bbb:{
+                            template:'#bbb',
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

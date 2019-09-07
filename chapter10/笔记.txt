@@ -1,0 +1,67 @@
+vue1.0动画原理 就是 transition / animation
+
+Animate.css css动画库 https://daneden.github.io/animate.css/
+动画
+进入之前
+- 显示
+- 离开
+
+
+v-show: flase/true
+v-show 的作用是控制动画显示关闭，充当一个按钮
+
+动画内容：
+- 动画名字要先确定
+```
+html部分：
+/* 显示时的状态 */
+.bill-transition{
+    opacity: 1;
+    transition: 0.3s;
+    transform: translate(0,0);
+}
+/* 动画离开动作 */
+.bill-leave{
+    opacity: 0;
+    /*消失时从左往右消失*/
+    transform: translateX(90px);
+}
+/* 动画进入到显示过程的过渡动画 */
+.bill-enter{
+    opacity: 0;
+    /* 进入时从下到上显示 */
+    transform: translateY(90px);
+}
+
+<button @click="change">动起来</button>
+<div v-show="show" transition="bill"></div>
+
+js部分：
+new Vue({
+    el:'body',
+    data:{
+        show:true,
+    },
+    methods:{
+        change(){
+            this.show = !this.show;
+        }
+    }
+})
+```
+    - 自定义名字-transtion： 动画显示时的状态
+    - 自定义名字-leave：动画离开时的动作
+    - 自定义名字-enter： 动画进入到显示时的过渡动画
+
+----
+#### js控制动画效果
+
+- 用animate.css 提供的类
+```
+transitions:{
+    自定义动画名：{
+        enterClass:'这里放入类名',
+        leaveClass:'这里放入类名'
+    }
+}
+```

@@ -1,0 +1,73 @@
+#### 过滤器
+类似于正则表达式，筛选条件,把原始数据加工得到想要的数据
+
+vue - angular
+{{msg|过滤器名称}}
+
+vue 内置过滤器
+capitalize - 首字母大写
+uppercase - 所有的英文字母变大写
+lowercase - 所有的英文字母变小写
+
+currency - 货币形式输出（美元）
+可以传参，第一个参数传入货币符号，第二个参数规定小数点后几位
+
+传参格式：
+过滤器名 “参数一” “参数二” “参数三”
+第一个参数 就是货币符号 默认$
+第二个参数 就是小数位 默认“2”位小数
+
+```
+    <br/>首字母大写：{{msg | capitalize}}
+    <br/>所有字母大写：{{msg | uppercase}}
+    <br/>所有字母小写：{{msg | lowercase}}
+    <br/>货币形式输出：{{msg | currency}}
+    <br/>人名币形式输出：{{msg | currency '￥'}}
+    <br/>后接三位小数：{{msg | currency '￥' '3'}}
+``` 
+
+pluralize - 后接“s”，一般是使英文变复数，但是别的词汇也会加“s”
+
+debounce - 延迟选择器 类似于delay() 方法，默认延迟‘300’毫秒执行，可传递参数要求时间
+`` <input type="button" value="click" id="ipt" @click="add | debounce '1000'">``
+
+limitBy - 要求数组长度只循环到第几位，类似于slice() 方法
+传递参数：第一位要求数组只循环到多少位下标，第二位要求从第几个开始
+```
+    <ul v-for="i in arr | limitBy 2">
+        <li>{{i}}</li>
+    </ul>
+```
+
+filterBy - 过滤，这个是过滤器中最像正则表达式的
+给出关键字过滤掉没有关键字的，可以过滤你所想要显示的，比较灵活
+```
+    <input type="text" v-model="fil">
+    <ul v-for="i in arr | filterBy fil">
+        <li>{{i}}</li>
+    </ul>
+```
+
+orderBy - 排序，可传递参数 ‘1’为升序，‘-1’为降序
+```
+    <h4>1 为升序，上至下是从小到大，-1 为降序，上至下是从大到小</h4>
+    <input type="text" v-model="order">
+    <ul v-for="i in arr | orderBy order">
+        <li>{{i}}</li>
+    </ul>
+```
+
+过滤器：
+Vue.filter('过滤器名称',function(){
+    return 值（过滤出来最后值）
+})
+
+双向过滤器：
+Vue.filter('过滤器名称',{
+    read:function(){
+
+    },
+    write:function(){
+        
+    }
+})

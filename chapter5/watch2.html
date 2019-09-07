@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>利用watch做计算器</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <input type="text" v-model="a">+
+    <input type="text" v-model="b">=
+{{c}}
+    <script>
+        var a = new Vue({
+            el:'body',
+            data:{
+                a:'',
+                b:'',
+                c:''
+            }
+        })
+        a.$watch('a',function(){
+            a.c=Number(a.a)+Number(a.b);
+        });
+        a.$watch('b',function(){
+            a.c=Number(a.a)+Number(a.b);
+        })    
+    </script>
+</body>
+</html>
