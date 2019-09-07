@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+            body,html{
+                height: 100%;
+                width: 100%;
+            }
+    </style>
+</head>
+<body @keydown.65="mybody">
+    
+    <script>
+        new Vue({
+            el:'body',
+            methods:{
+                mybody:function(){
+                    //event.keyCode 是键盘ascll码 
+                    //@click.键值也可以 例如 @click.65
+                    //如果想多个按键继续加就好了 @click.65.66.67
+                    console.log(event.keyCode);
+                    alert('我按键盘了');
+                }
+            }
+        })    
+    </script>
+</body>
+</html>

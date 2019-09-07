@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        body,html{
+            height: 100%;
+            width: 100%;
+        }
+        div{
+            height: 100px;
+            width: 100px;
+            background: black;
+        }
+    </style>
+</head>
+<body @click="myBody">
+    
+<div @click.stop="myDiv"></div>
+    <script>
+        new Vue({
+            el:'body',
+            methods:{
+                myDiv:function() {
+                    event.cancelBubble=true;
+                    alert('i am div');
+                },
+                myBody:function(event){
+                    //取消事件冒泡第一种
+                    //event.cancelBubble=true;
+                    //第二种
+                    //event.stopProgation();
+                    //第三种，直接在click后米娜添加 '.stop'
+                    alert('i am body');
+                }
+            }
+        })    
+    </script>
+</body>
+</html>

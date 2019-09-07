@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+            body,html{
+                height: 100%;
+                width: 100%;
+            }
+            div{
+                height: 100px;
+                width: 100px;
+                background: black;
+            }
+        </style>
+</head>
+<body @click.prevent="myBody">
+    <div @contextmenu.stop="myBody"></div>
+    <script>
+        new Vue({
+            el:'body',
+            methods:{
+                myBody:function(){
+                    //或者直接@click.prevent 也可以
+                    event.preventDefault();
+                    alert('我右键了');
+                }
+            }
+        })
+    </script>
+</body>
+</html>

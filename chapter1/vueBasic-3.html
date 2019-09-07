@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+
+</head>
+<body>
+    <div v-for='i in arr'>{{i}}</div>
+    <div v-for='i in json'>{{i}}</div>
+    <div v-for='(key,value) in json'>{{key}}=>{{value}}</div>
+    <div v-for='i in json'>{{$key}}=>{{i}}</div>
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                //这是个字符串数组
+                arr:['a','b','c'],
+                json:{
+                    bill:18,
+                    bill2:21,
+                    bill3:24
+                }
+            }
+        })
+    </script>
+</body>
+</html>

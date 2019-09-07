@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<!-- vue 模板 -- {{}}-->
+{{msg}}
+    <script>
+        new Vue({
+            //作用域：el - element缩写
+            el:'body',
+            //传入的数据
+            data:{
+                msg:'hello vue!',
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        body,html{
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body @click="show(10,event)">
+    <!-- <input type="button" value="touch" @click="show"> -->
+    <script>
+        new Vue({
+            el:'body',
+            methods:{
+                //事件对象，如果传参只有一个，默认就是事件对象，如果有多个参数传入，那么事件对象就是$event
+                show:function(e,$event){
+                    console.log(e,event);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

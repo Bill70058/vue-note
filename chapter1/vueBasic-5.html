@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        div{
+            height: 100px;
+            width: 100px;
+            background:black;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" v-on:click='change' value="change">
+    <div v-show='dis'></div>
+
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                dis:true,
+            },
+            //vue 事件区域，所有事件控制写在这里
+            methods:{
+                change:function() {
+                    this.dis=!this.dis;
+                }
+            }
+        })    
+    </script>
+</body>
+</html>
