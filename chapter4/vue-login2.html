@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <script src="../vue.js"></script>
+    <script src="../vue-resource.js"></script>
+</head>
+<body>
+用户名：<input type="text" v-model="user"><br/>
+密码：<input :type="passwordBtn" v-model="password"><br/>
+<input type="button" value="submit" @click="login">
+<input type="button" value="密码可见" @click="passBtn">
+
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                num:1,
+                msg:'hello vue!',
+                passwordBtn:'password',
+                user:'',
+                password:'',
+            },
+            methods:{
+                passBtn:function(){
+                    this.num++;
+                    this.num%2==0?this.passwordBtn='text':this.passwordBtn='password';
+                },
+                login:function(){
+                    //这个方法是绑定在vue-resource库的，如果不引入那个库将无法使用
+                    //console.log(this.$http);
+                    this.$http.get('http://localhost:1234/a',{
+                        user:this.user,
+                        pass:this.password
+                    }).then(function(data){
+                        if(data.data.ok=='1'){
+                            alert('登陆成功');
+                        }else {
+                            alert('登陆失败');
+                        }
+                    },function(){
+                        alert('登陆失败');
+                    });
+                    //也可以不用then的第二个函数，用then的catch方法
+                    //}).catch(function(){
+                    //  alert('登陆失败');
+                    //})
+                }
+            }
+        })
+    </script>
+</body>
+</html>

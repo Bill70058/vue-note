@@ -1,0 +1,86 @@
+vue1.x 交互
+
+前端 - 后端 - 数据库
+
+html+css+js     php/net/node    
+
+node.js js 基本和js相似
+前端学习推荐
+ 
+bower 只是npm包管理器中的一个包 - 包管理器
+
+bower info vue <->版本
+
+如果直接下载 默认是最高的版本号
+
+bower i 下载库的名字#版本号
+
+vue本身并没有提供给我们交互的方法
+
+推荐了一个插件 vue-resource
+
+demo <->
+登陆
+输入用户名
+输入密码
+登陆按钮
+登陆成功- > 成功
+
+
+get / post
+
+----
+//get 的第一种写法
+
+this.$http.get('地址',{
+    //数据
+}).then(function(data){
+    //处理成功的回调函数，有个参数data
+},function(){
+    //处理失败的回调函数
+});
+
+//get 的第二种写法
+this.$http.get('地址',{
+    //数据
+}).then(function(data){
+    //处理成功的回调函数，有个参数data
+}).catch(function(){
+
+})
+
+----
+//post 的写法
+this.$http.post('地址',{
+    //数据
+},{
+    //设置传输数据格式为json
+    emulateJSON:true
+}).then(function(data){
+    //处理成功的回调函数，有个参数data
+},function(){
+    //处理失败的回调函数
+});
+
+----
+利用Ajax来前后端传输数据有两个问题
+- 以什么格式交换数据
+- 跨域需求怎么解决
+
+拿最近比较火的谍战片来打个比方，JSON是地下党们用来书写和
+交换情报的“暗号”，而JSONP则是把用暗号书写的情报传递给自己
+同志时使用的接头方式
+
+JSONP => 跨域用的
+jsonp -x- json 这两个没半点关系
+
+什么是跨域：在本页面访问其他页面的数据
+例如：src，href就是跨域
+
+jsonp => 回调函数的key值
+
+
+----
+##### 遇到的问题
+- 访问静态资源返回404错误
+- 传输数据后端接收不到前端传输的数据，而前端能接收到后端传输的数据

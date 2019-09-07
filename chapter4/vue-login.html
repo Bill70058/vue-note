@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <script src="../vue.js"></script>
+    <script src="../vue-resource.js"></script>
+</head>
+<body>
+用户名：<input type="text" v-model="user"><br/>
+密码：<input :type="passwordBtn" v-model="password"><br/>
+<input type="button" value="submit" @click="login">
+<input type="button" value="密码可见" @click="passBtn">
+
+    <script>
+        new Vue({
+            el:'body',
+            data:{
+                num:1,
+                msg:'hello vue!',
+                passwordBtn:'password',
+                user:'',
+                password:'',
+            },
+            methods:{
+                passBtn:function(){
+                    this.num++;
+                    this.num%2==0?this.passwordBtn='text':this.passwordBtn='password';
+                },
+                login:function(){
+                    console.log(this.user,this.password);
+                    console.log(this.$http);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
